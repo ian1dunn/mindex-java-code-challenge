@@ -23,10 +23,12 @@ public class ReportingStructureController {
     public ReportingStructure getStructure(@PathVariable String id) {
         LOG.debug("Received reporting structure request for id [{}]", id);
 
-        Employee employee = employeeService.read(id);
-        ReportingStructure reportingStructure = new ReportingStructure(employee);
+        ReportingStructure reportingStructure = new ReportingStructure();
 
-        int numberOfReports = reportingStructureService.getNumberOfReports(id);
+        Employee structuredEmployee = reportingStructureService.buildReportStructure(id);
+        reportingStructure.setEmployee(structuredEmployee);
+
+        int numberOfReports = reportingStructureService.getNumberOfReports(structuredEmployee);
         reportingStructure.setNumberOfReports(numberOfReports);
 
         return reportingStructure;
