@@ -1,4 +1,29 @@
-# Coding Challenge
+# Coding Challenge - Ian Dunn
+
+## My Solution
+Below are my solution's endpoints, in addition to the originals.
+
+### Part 1
+```
+* READ
+    * HTTP Method: GET 
+    * URL: localhost:8080/reportingStructure/{id}
+    * RESPONSE: ReportingStructure
+```
+
+### Part 2
+```
+* CREATE
+    * HTTP Method: POST 
+    * URL: localhost:8080/compensation
+    * PAYLOAD: Compensation
+    * RESPONSE: Compensation
+* READ
+    * HTTP Method: GET 
+    * URL: localhost:8080/compensation/{id}
+    * RESPONSE: Compensation
+```
+
 ## What's Provided
 A simple [Spring Boot](https://projects.spring.io/spring-boot/) web application has been created and bootstrapped 
 with data. The application contains information about all employees at a company. On application start-up, an in-memory 

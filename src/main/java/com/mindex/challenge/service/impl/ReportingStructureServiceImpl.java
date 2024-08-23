@@ -1,11 +1,8 @@
 package com.mindex.challenge.service.impl;
 
-import com.mindex.challenge.dao.EmployeeRepository;
 import com.mindex.challenge.data.Employee;
 import com.mindex.challenge.service.EmployeeService;
 import com.mindex.challenge.service.ReportingStructureService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,14 +14,13 @@ public class ReportingStructureServiceImpl implements ReportingStructureService 
     @Autowired
     private EmployeeService employeeService;
 
-    @Override
     /**
-     * This is a recursive method to get the number of reports of an employee (i.e. the number of direct reports for an
-     * employee and all of their distinct reports).
+     * This is a recursive method to build the full report structure of a given employee ID.
      *
-     * @param  employeeId  The employee ID of the employee to get the total number of reports of.
-     * @return             The total number of reports of the employee.
+     * @param  employeeId  The employee ID of the employee to build the directReports field.
+     * @return             A modified employee object with ALL direct reports, rather than just the first level.
      */
+    @Override
     public Employee buildReportStructure(String employeeId) {
         Employee employee = employeeService.read(employeeId);
 
@@ -41,6 +37,13 @@ public class ReportingStructureServiceImpl implements ReportingStructureService 
         return employee;
     }
 
+    /**
+     * This is a recursive method to total the number of direct reports of an employee.
+     *
+     * @param  employee  The employee object of which the directReports field will be traversed.
+     * @return           The total number of direct reports of the employee.
+     */
+    @Override
     public int getNumberOfReports(Employee employee) {
         if (employee.getDirectReports() == null || employee.getDirectReports().isEmpty())
             return 0;
