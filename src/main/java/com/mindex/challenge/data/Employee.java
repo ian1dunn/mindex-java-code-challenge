@@ -1,6 +1,7 @@
 package com.mindex.challenge.data;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Employee {
     private String employeeId;
@@ -59,5 +60,14 @@ public class Employee {
 
     public void setDirectReports(List<Employee> directReports) {
         this.directReports = directReports;
+    }
+
+    @Override
+    public final boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Employee)) return false;
+
+        Employee employee = (Employee) o;
+        return Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName) && Objects.equals(position, employee.position) && Objects.equals(department, employee.department);
     }
 }
